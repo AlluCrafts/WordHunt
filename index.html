@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordHunt</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>WordHunt</h1>
+    <p>Are you the chosen one to crack this puzzle? Hmm, ok, you will get seven links with each containing one vital letter for the secret word. Type it in the box when you find it. Hehehhee!</p>
+    <div id="links">
+      <a href="#" onclick="checkLetter('a')">link1</a>
+      <a href="#" onclick="checkLetter('l')">link2</a>
+      <a href="#" onclick="checkLetter('c')">link3</a>
+      <a href="#" onclick="checkLetter('h')">link4</a>
+      <a href="#" onclick="checkLetter('e')">link5</a>
+      <a href="#" onclick="checkLetter('m')">link6</a>
+      <a href="#" onclick="checkLetter('y')">link7</a>
+    </div>
+    <div id="message"></div>
+    <input type="text" id="wordInput" placeholder="Enter word..." class="word-input">
+    <button onclick="checkWord()">Submit</button>
+  </div>
+
+  <script>
+    function checkLetter(letter) {
+      document.getElementById("wordInput").value += letter;
+    }
+
+    function checkWord() {
+      var word = document.getElementById("wordInput").value.toLowerCase();
+      if (word === "alchemy") {
+        localStorage.setItem("wordHuntSolved", "true");
+        window.location.href = "secret_page.html";
+      } else {
+        document.getElementById("message").innerText = "Oops you got it wrong!";
+      }
+    }
+
+    var hasSolved = localStorage.getItem("wordHuntSolved");
+    if (hasSolved) {
+      document.getElementById("wordInput").disabled = false;
+    }
+  </script>
+</body>
+</html>
